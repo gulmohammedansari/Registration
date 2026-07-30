@@ -498,12 +498,9 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ─── CONFIGURATION ─────────────────────────────────────────────────────────
-    // STEP: Replace this URL with your deployed Google Apps Script Web App URL
+
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxon49-M0VjHp5uL5fuwkwtH0LxvTHg0aDDZNVNCUxytnSsYBqhC-in7de-85ckc8h/exec';
-    // STEP: Must exactly match REGISTRATION_SECRET in the Apps Script file.
-    // This blocks blind spam bots that only have the bare URL — it does NOT
-    // hide the secret from anyone who views this page's source.
+
     const REG_TOKEN = '5kwKAsVBvM';
     // ───────────────────────────────────────────────────────────────────────────
 
@@ -523,13 +520,13 @@
     form.addEventListener('input', updateProgress);
     form.addEventListener('change', updateProgress);
 
-    // ── Aadhaar formatting ─────────────────────────────────────────────────────
+    
     document.getElementById('aadhaar').addEventListener('input', function(e) {
       let v = e.target.value.replace(/\D/g, '').slice(0, 12);
       e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
     });
 
-    // ── Validation ─────────────────────────────────────────────────────────────
+    
     function validate() {
       let ok = true;
 
@@ -617,7 +614,7 @@
       setTimeout(() => t.classList.remove('show'), 4500);
     }
 
-    // ── Submit ─────────────────────────────────────────────────────────────────
+    
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       if (!validate()) return;
@@ -646,10 +643,7 @@
         if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
           throw new Error('SCRIPT_URL not configured — see setup instructions.');
         }
-        // NOTE: switched from mode:'no-cors' to a readable request (text/plain
-        // avoids a CORS preflight Apps Script can't handle). This is required
-        // now — with server-side CAPTCHA/token checks, a rejected submission
-        // must actually surface to the user instead of always showing success.
+
         const res = await fetch(SCRIPT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
